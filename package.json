@@ -14,7 +14,10 @@
   "author": "Chris Zimmerman",
   "license": "ISC",
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>src/test/setupTests.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/src/test/setupTests.js",
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/src/__mocks__/styleMock.js"
+    }
   },
   "dependencies": {
     "babel-core": "^6.26.0",
@@ -25,6 +28,7 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^0.28.11",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-15": "^1.0.5",
     "enzyme-adapter-react-16": "^1.1.1",
@@ -35,6 +39,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0",
+    "style-loader": "^0.21.0",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.3"
   },
