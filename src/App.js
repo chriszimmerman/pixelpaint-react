@@ -1,5 +1,6 @@
 import React from 'react';
 import ColorPicker from './ColorPicker';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -8,7 +9,9 @@ class App extends React.Component {
 
   render() {
       return (
-        <ColorPicker/>
+        <div class="app-container">
+          <ColorPicker/>
+        </div>
       );
   }
 }
