@@ -1,7 +1,6 @@
 import React from 'react';
 import App from '../App';
-import { shallow, mount, render } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import { shallow } from 'enzyme';
 import ColorPicker from '../ColorPicker';
 
 it('renders a ColorPicker component', () => {
