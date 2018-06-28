@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "npm-run-all --parallel start-server webpack-watch test-watch",
+    "start-server": "node server.js",
+    "webpack-watch": "webpack --watch",
     "compile": "webpack",
     "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
     "test": "jest",
@@ -44,6 +46,7 @@
     "webpack-dev-middleware": "^2.0.3"
   },
   "devDependencies": {
-    "babel-preset-stage-0": "^6.24.1"
+    "babel-preset-stage-0": "^6.24.1",
+    "npm-run-all": "^4.1.3"
   }
 }
