@@ -3,14 +3,21 @@ import ColorPicker from '../ColorPicker';
 import { shallow } from 'enzyme';
 
 it('renders a color picker', () => {
-    const wrapper = shallow(<ColorPicker />);
+    const wrapper = shallow(<ColorPicker onColorChanged={() => {}}/>);
     expect(wrapper.find('input').length).toBe(1);
     expect(wrapper.find('input').prop('type')).toBe("color");
 });
 
+it('default the color to black', () => {
+    const expectedColor = "#000000"
+    const wrapper = shallow(<ColorPicker onColorChanged={() => {}}/>);
+    expect(wrapper.find('input').length).toBe(1);
+    expect(wrapper.find('input').prop('value')).toBe(expectedColor);
+});
+
 it('sets the ColorPicker color to the passed in color prop', () => {
     const expectedColor = "#FFFFFF"
-    const wrapper = shallow(<ColorPicker color={expectedColor} />);
+    const wrapper = shallow(<ColorPicker color={expectedColor} onColorChanged={() => {}}/>);
     expect(wrapper.find('input').length).toBe(1);
     expect(wrapper.find('input').prop('value')).toBe(expectedColor);
 });
