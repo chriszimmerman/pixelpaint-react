@@ -3,14 +3,22 @@ import ColorPicker from './ColorPicker';
 import './App.css';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+
+  state = {
+    selectedColor: "#000000"
+  }
+
+  updateColor = (event) => {
+    this.setState({selectedColor: event.target.value});
   }
 
   render() {
       return (
-        <div class="app-container">
-          <ColorPicker/>
+        <div className="app-container">
+          <ColorPicker
+            color={this.state.selectedColor}
+            onColorChanged={this.updateColor}
+          />
         </div>
       );
   }

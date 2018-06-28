@@ -20403,10 +20403,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
 
-  function App(props) {
+  function App() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      selectedColor: "#000000"
+    }, _this.updateColor = function (event) {
+      _this.setState({ selectedColor: event.target.value });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(App, [{
@@ -20414,8 +20426,11 @@ var App = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { 'class': 'app-container' },
-        _react2.default.createElement(_ColorPicker2.default, null)
+        { className: 'app-container' },
+        _react2.default.createElement(_ColorPicker2.default, {
+          color: this.state.selectedColor,
+          onColorChanged: this.updateColor
+        })
       );
     }
   }]);
@@ -20462,7 +20477,11 @@ var ColorPicker = function (_React$Component) {
     _createClass(ColorPicker, [{
         key: "render",
         value: function render() {
-            return _react2.default.createElement("input", { type: "color" });
+            return _react2.default.createElement("input", {
+                type: "color",
+                value: this.props.color,
+                onChange: this.props.onColorChanged
+            });
         }
     }]);
 
