@@ -20,7 +20,7 @@ class App extends React.Component {
             color={this.state.selectedColor}
             onColorChanged={this.updateColor}
           />
-          <Grid/>
+          <Grid currentColor={this.state.selectedColor}/>
         </div>
       );
   }

@@ -20470,7 +20470,7 @@ var App = function (_React$Component) {
           color: this.state.selectedColor,
           onColorChanged: this.updateColor
         }),
-        _react2.default.createElement(_Grid2.default, null)
+        _react2.default.createElement(_Grid2.default, { currentColor: this.state.selectedColor })
       );
     }
   }]);
@@ -21190,6 +21190,10 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(13);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _Pixel = __webpack_require__(32);
 
 var _Pixel2 = _interopRequireDefault(_Pixel);
@@ -21226,6 +21230,11 @@ var Grid = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Grid;
+
+
+Grid.propTypes = {
+    currentColor: _propTypes2.default.string
+};
 
 /***/ }),
 /* 32 */

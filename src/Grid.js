@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Pixel from './Pixel';
 
 class Grid extends React.Component {
@@ -12,3 +13,7 @@ class Grid extends React.Component {
 }
 
 export default Grid;
+
+Grid.propTypes = {
+    currentColor: PropTypes.string
+};
