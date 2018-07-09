@@ -15,3 +15,10 @@ it('defaults the color to white', () => {
     expect(wrapper.find('div').length).toBe(1);
     expect(wrapper.find('div').prop('style')).toHaveProperty("backgroundColor", expectedColor);
 });
+
+it('is 20 by 20 pixels', () => {
+    const wrapper = shallow(<Pixel/>);
+    expect(wrapper.find('div').length).toBe(1);
+    expect(wrapper.find('div').prop('style')).toHaveProperty("height", "20px");
+    expect(wrapper.find('div').prop('style')).toHaveProperty("width", "20px");
+});

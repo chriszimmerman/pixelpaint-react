@@ -1,5 +1,6 @@
 import React from 'react';
 import ColorPicker from './ColorPicker';
+import Grid from './Grid';
 import './App.css';
 
 class App extends React.Component {
@@ -19,6 +20,7 @@ class App extends React.Component {
             color={this.state.selectedColor}
             onColorChanged={this.updateColor}
           />
+          <Grid/>
         </div>
       );
   }
