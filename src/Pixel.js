@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 class Pixel extends React.Component {
     render() {
         var style = {
-            backgroundColor: this.props.color,
+            backgroundColor: this.props.backgroundColor,
             height: "20px",
-            width: "20px"
+            width: "20px",
+            display: "inline-block"
         };
+
         return (
             <div
                 style={style}
@@ -20,10 +22,10 @@ class Pixel extends React.Component {
 export default Pixel;
 
 Pixel.propTypes = {
-    color: PropTypes.string,
+    backgroundColor: PropTypes.string,
     handleOnClick: PropTypes.func
 };
 
 Pixel.defaultProps = {
-    color: '#000000'
+    backgroundColor: '#000000'
 };

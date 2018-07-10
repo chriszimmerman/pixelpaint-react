@@ -21220,20 +21220,43 @@ var Grid = function (_React$Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Grid.__proto__ || Object.getPrototypeOf(Grid)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-            color: _this.props.currentColor
-        }, _this.updateColor = function () {
-            _this.setState({ color: _this.props.currentColor });
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Grid.__proto__ || Object.getPrototypeOf(Grid)).call.apply(_ref, [this].concat(args))), _this), _this.generatePixels = function () {
+            return Array.from(new Array(_this.props.dimension * _this.props.dimension), function (x, i) {
+                return { key: i, color: '#000000' };
+            });
+        }, _this.state = {
+            brushColor: _this.props.currentColor,
+            pixels: _this.generatePixels()
+        }, _this.updateColor = function (key) {
+            var pixels = _this.state.pixels;
+            pixels[key].color = _this.props.currentColor;
+            _this.setState(pixels);
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Grid, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
+            var style = {
+                display: "grid",
+                gridTemplateColumns: 'repeat(' + this.props.dimension + ', 1fr)',
+                width: 20 * this.props.dimension
+            };
+
             return _react2.default.createElement(
                 'div',
-                null,
-                _react2.default.createElement(_Pixel2.default, { color: this.state.color, handleOnClick: this.updateColor })
+                { style: style },
+                this.state.pixels.map(function (pixel) {
+                    return _react2.default.createElement(_Pixel2.default, {
+                        key: pixel.key,
+                        backgroundColor: pixel.color,
+                        handleOnClick: function handleOnClick() {
+                            _this2.updateColor(pixel.key);
+                        }
+                    });
+                })
             );
         }
     }]);
@@ -21245,7 +21268,12 @@ exports.default = Grid;
 
 
 Grid.propTypes = {
-    currentColor: _propTypes2.default.string
+    currentColor: _propTypes2.default.string,
+    dimension: _propTypes2.default.number
+};
+
+Grid.defaultProps = {
+    dimension: 8
 };
 
 /***/ }),
@@ -21290,10 +21318,12 @@ var Pixel = function (_React$Component) {
         key: 'render',
         value: function render() {
             var style = {
-                backgroundColor: this.props.color,
+                backgroundColor: this.props.backgroundColor,
                 height: "20px",
-                width: "20px"
+                width: "20px",
+                display: "inline-block"
             };
+
             return _react2.default.createElement('div', {
                 style: style,
                 onClick: this.props.handleOnClick
@@ -21308,12 +21338,12 @@ exports.default = Pixel;
 
 
 Pixel.propTypes = {
-    color: _propTypes2.default.string,
+    backgroundColor: _propTypes2.default.string,
     handleOnClick: _propTypes2.default.func
 };
 
 Pixel.defaultProps = {
-    color: '#000000'
+    backgroundColor: '#000000'
 };
 
 /***/ }),
