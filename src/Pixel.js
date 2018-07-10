@@ -9,7 +9,10 @@ class Pixel extends React.Component {
             width: "20px"
         };
         return (
-            <div style={style}></div>
+            <div
+                style={style}
+                onClick={this.props.handleOnClick}
+            ></div>
         );
     }
 }
@@ -17,7 +20,8 @@ class Pixel extends React.Component {
 export default Pixel;
 
 Pixel.propTypes = {
-    color: PropTypes.string
+    color: PropTypes.string,
+    handleOnClick: PropTypes.func
 };
 
 Pixel.defaultProps = {

@@ -21210,9 +21210,21 @@ var Grid = function (_React$Component) {
     _inherits(Grid, _React$Component);
 
     function Grid() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, Grid);
 
-        return _possibleConstructorReturn(this, (Grid.__proto__ || Object.getPrototypeOf(Grid)).apply(this, arguments));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Grid.__proto__ || Object.getPrototypeOf(Grid)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            color: _this.props.currentColor
+        }, _this.updateColor = function () {
+            _this.setState({ color: _this.props.currentColor });
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Grid, [{
@@ -21221,7 +21233,7 @@ var Grid = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_Pixel2.default, null)
+                _react2.default.createElement(_Pixel2.default, { color: this.state.color, handleOnClick: this.updateColor })
             );
         }
     }]);
@@ -21282,7 +21294,10 @@ var Pixel = function (_React$Component) {
                 height: "20px",
                 width: "20px"
             };
-            return _react2.default.createElement('div', { style: style });
+            return _react2.default.createElement('div', {
+                style: style,
+                onClick: this.props.handleOnClick
+            });
         }
     }]);
 
@@ -21293,7 +21308,8 @@ exports.default = Pixel;
 
 
 Pixel.propTypes = {
-    color: _propTypes2.default.string
+    color: _propTypes2.default.string,
+    handleOnClick: _propTypes2.default.func
 };
 
 Pixel.defaultProps = {

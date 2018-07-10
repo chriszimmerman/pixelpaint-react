@@ -16,6 +16,13 @@ it('defaults the color to white', () => {
     expect(wrapper.find('div').prop('style')).toHaveProperty("backgroundColor", expectedColor);
 });
 
+it('takes an onClick handler as a prop and sets it on the onClick event', () => {
+    const expectedOnClick = () => {};
+    const wrapper = shallow(<Pixel handleOnClick={expectedOnClick}/>);
+    expect(wrapper.find('div').length).toBe(1);
+    expect(wrapper.find('div').prop('onClick')).toBe(expectedOnClick);
+});
+
 it('is 20 by 20 pixels', () => {
     const wrapper = shallow(<Pixel/>);
     expect(wrapper.find('div').length).toBe(1);
