@@ -27,5 +27,5 @@ Pixel.propTypes = {
 };
 
 Pixel.defaultProps = {
-    backgroundColor: '#000000'
+    backgroundColor: '#FFFFFF'
 };

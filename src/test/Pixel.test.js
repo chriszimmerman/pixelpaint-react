@@ -10,7 +10,7 @@ it('renders a pixel with a given color', () => {
 });
 
 it('defaults the color to white', () => {
-    const expectedColor = "#000000" 
+    const expectedColor = "#FFFFFF" 
     const wrapper = shallow(<Pixel/>);
     expect(wrapper.find('div').length).toBe(1);
     expect(wrapper.find('div').prop('style')).toHaveProperty("backgroundColor", expectedColor);

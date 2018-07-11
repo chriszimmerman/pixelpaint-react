@@ -21222,7 +21222,7 @@ var Grid = function (_React$Component) {
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Grid.__proto__ || Object.getPrototypeOf(Grid)).call.apply(_ref, [this].concat(args))), _this), _this.generatePixels = function () {
             return Array.from(new Array(_this.props.dimension * _this.props.dimension), function (x, i) {
-                return { key: i, color: '#000000' };
+                return { key: i, color: '#FFFFFF' };
             });
         }, _this.state = {
             brushColor: _this.props.currentColor,
@@ -21242,7 +21242,11 @@ var Grid = function (_React$Component) {
             var style = {
                 display: "grid",
                 gridTemplateColumns: 'repeat(' + this.props.dimension + ', 1fr)',
-                width: 20 * this.props.dimension
+                gridColumnGap: "1px",
+                gridRowGap: "1px",
+                backgroundColor: "black",
+                border: "1px solid black",
+                width: 20 * this.props.dimension + this.props.dimension + 1
             };
 
             return _react2.default.createElement(
@@ -21343,7 +21347,7 @@ Pixel.propTypes = {
 };
 
 Pixel.defaultProps = {
-    backgroundColor: '#000000'
+    backgroundColor: '#FFFFFF'
 };
 
 /***/ }),
