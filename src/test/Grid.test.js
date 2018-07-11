@@ -7,24 +7,24 @@ it('renders a grid with n rows where n is the dimension', () => {
     const wrapper = shallow(<Grid dimension={2}/>);
     const grid = wrapper.find('div');
     expect(grid.length).toBe(1);
-    expect(grid.prop('style')).toHaveProperty("display", "grid");
-    expect(grid.prop('style')).toHaveProperty("gridTemplateColumns", "repeat(2, 1fr)");
+    expect(grid.prop('style')).toHaveProperty('display', 'grid');
+    expect(grid.prop('style')).toHaveProperty('gridTemplateColumns', 'repeat(2, 1fr)');
 });
 
 it('renders a grid with black lines between the cells', () => {
     const wrapper = shallow(<Grid/>);
     const grid = wrapper.find('div');
     expect(grid.length).toBe(1);
-    expect(grid.prop('style')).toHaveProperty("gridColumnGap", "1px");
-    expect(grid.prop('style')).toHaveProperty("gridRowGap", "1px");
-    expect(grid.prop('style')).toHaveProperty("backgroundColor", "black");
+    expect(grid.prop('style')).toHaveProperty('gridColumnGap', '1px');
+    expect(grid.prop('style')).toHaveProperty('gridRowGap', '1px');
+    expect(grid.prop('style')).toHaveProperty('backgroundColor', 'black');
 });
 
 it('has a black border 1 pixel thick', () => {
     const wrapper = shallow(<Grid/>);
     const grid = wrapper.find('div');
     expect(grid.length).toBe(1);
-    expect(grid.prop('style')).toHaveProperty("border", "1px solid black");
+    expect(grid.prop('style')).toHaveProperty('border', '1px solid black');
 });
 
 it('has a width equal to all of the squares\' width, the lines between the squares, and the border lines', () => {
@@ -37,7 +37,7 @@ it('has a width equal to all of the squares\' width, the lines between the squar
     const wrapper = shallow(<Grid dimension={gridDimension}/>);
     const grid = wrapper.find('div');
     expect(grid.length).toBe(1);
-    expect(grid.prop('style')).toHaveProperty("width", expectedWidth);
+    expect(grid.prop('style')).toHaveProperty('width', expectedWidth);
 });
 
 it('renders dimension^2 Pixel components', () => {

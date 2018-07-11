@@ -20454,7 +20454,7 @@ var App = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      selectedColor: "#000000"
+      selectedColor: '#000000'
     }, _this.updateColor = function (event) {
       _this.setState({ selectedColor: event.target.value });
     }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -21240,12 +21240,12 @@ var Grid = function (_React$Component) {
             var _this2 = this;
 
             var style = {
-                display: "grid",
+                display: 'grid',
                 gridTemplateColumns: 'repeat(' + this.props.dimension + ', 1fr)',
-                gridColumnGap: "1px",
-                gridRowGap: "1px",
-                backgroundColor: "black",
-                border: "1px solid black",
+                gridColumnGap: '1px',
+                gridRowGap: '1px',
+                backgroundColor: 'black',
+                border: '1px solid black',
                 width: 20 * this.props.dimension + this.props.dimension + 1
             };
 
@@ -21323,9 +21323,9 @@ var Pixel = function (_React$Component) {
         value: function render() {
             var style = {
                 backgroundColor: this.props.backgroundColor,
-                height: "20px",
-                width: "20px",
-                display: "inline-block"
+                height: '20px',
+                width: '20px',
+                display: 'inline-block'
             };
 
             return _react2.default.createElement('div', {

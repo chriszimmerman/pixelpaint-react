@@ -5,7 +5,7 @@ class ColorPicker extends React.Component {
     render() {
         return (
             <input
-                type="color"
+                type='color'
                 value={this.props.color}
                 onChange={this.props.onColorChanged}
             />

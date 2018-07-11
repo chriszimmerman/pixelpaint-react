@@ -5,9 +5,9 @@ class Pixel extends React.Component {
     render() {
         var style = {
             backgroundColor: this.props.backgroundColor,
-            height: "20px",
-            width: "20px",
-            display: "inline-block"
+            height: '20px',
+            width: '20px',
+            display: 'inline-block'
         };
 
         return (

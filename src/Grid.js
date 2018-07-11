@@ -22,12 +22,12 @@ class Grid extends React.Component {
 
     render() {
         const style = {
-            display: "grid",
+            display: 'grid',
             gridTemplateColumns: `repeat(${this.props.dimension}, 1fr)`,
-            gridColumnGap: "1px",
-            gridRowGap: "1px",
-            backgroundColor: "black",
-            border: "1px solid black",
+            gridColumnGap: '1px',
+            gridRowGap: '1px',
+            backgroundColor: 'black',
+            border: '1px solid black',
             width: 20 * this.props.dimension + this.props.dimension + 1
         }
 

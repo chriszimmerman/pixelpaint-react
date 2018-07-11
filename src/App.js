@@ -6,7 +6,7 @@ import './App.css';
 class App extends React.Component {
 
   state = {
-    selectedColor: "#000000"
+    selectedColor: '#000000'
   }
 
   updateColor = (event) => {
@@ -15,7 +15,7 @@ class App extends React.Component {
 
   render() {
       return (
-        <div className="app-container">
+        <div className='app-container'>
           <ColorPicker
             color={this.state.selectedColor}
             onColorChanged={this.updateColor}
