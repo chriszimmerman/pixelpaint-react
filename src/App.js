@@ -41,6 +41,7 @@ class App extends React.Component {
           <Grid
             pixels={this.state.pixels}
             updatePixelColor={this.updatePixelColor}
+            dimension={this.state.dimension}
            />
         </div>
       );

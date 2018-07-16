@@ -37,7 +37,3 @@ Grid.propTypes = {
     pixels: PropTypes.arrayOf(PropTypes.object).isRequired,
     updatePixelColor: PropTypes.func
 };
-
-Grid.defaultProps = {
-    dimension: 8
-};

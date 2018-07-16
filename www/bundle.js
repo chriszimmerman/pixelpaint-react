@@ -20471,7 +20471,8 @@ var App = function (_React$Component) {
         }),
         _react2.default.createElement(_Grid2.default, {
           pixels: this.state.pixels,
-          updatePixelColor: this.updatePixelColor
+          updatePixelColor: this.updatePixelColor,
+          dimension: this.state.dimension
         })
       );
     }
@@ -21278,10 +21279,6 @@ Grid.propTypes = {
     dimension: _propTypes2.default.number,
     pixels: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
     updatePixelColor: _propTypes2.default.func
-};
-
-Grid.defaultProps = {
-    dimension: 8
 };
 
 /***/ }),
