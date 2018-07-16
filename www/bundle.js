@@ -20445,16 +20445,30 @@ var App = function (_React$Component) {
   function App(props) {
     _classCallCheck(this, App);
 
+    var generatePixels = function generatePixels(dimension) {
+      return Array.from(new Array(dimension * dimension), function (_) {
+        return { color: '#FFFFFF' };
+      });
+    };
+
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _initialiseProps.call(_this);
+    _this.updatePixelColor = function (key) {
+      var pixels = _this.state.pixels;
+      pixels[key].color = _this.state.selectedBrushColor;
+      _this.setState(pixels);
+    };
+
+    _this.updateSelectedBrushColor = function (event) {
+      _this.setState({ selectedBrushColor: event.target.value });
+    };
 
     var dimension = 8;
 
     _this.state = {
       selectedBrushColor: '#000000',
       dimension: dimension,
-      pixels: _this.generatePixels(dimension)
+      pixels: generatePixels(dimension)
     };
     return _this;
   }
@@ -20480,26 +20494,6 @@ var App = function (_React$Component) {
 
   return App;
 }(_react2.default.Component);
-
-var _initialiseProps = function _initialiseProps() {
-  var _this2 = this;
-
-  this.generatePixels = function (dimension) {
-    return Array.from(new Array(dimension * dimension), function (_) {
-      return { color: '#FFFFFF' };
-    });
-  };
-
-  this.updatePixelColor = function (key) {
-    var pixels = _this2.state.pixels;
-    pixels[key].color = _this2.state.selectedBrushColor;
-    _this2.setState(pixels);
-  };
-
-  this.updateSelectedBrushColor = function (event) {
-    _this2.setState({ selectedBrushColor: event.target.value });
-  };
-};
 
 exports.default = App;
 

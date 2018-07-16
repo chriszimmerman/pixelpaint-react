@@ -5,20 +5,20 @@ import './App.css';
 
 class App extends React.Component {
   constructor(props){
+    const generatePixels = (dimension) => {
+        return Array.from(new Array(dimension * dimension), (_) => {
+            return {color: '#FFFFFF'};
+        });
+    }
+
     super(props);
     const dimension = 8;
 
     this.state = {
       selectedBrushColor: '#000000',
       dimension: dimension,
-      pixels: this.generatePixels(dimension)
+      pixels: generatePixels(dimension)
     };
-  }
-
-  generatePixels = (dimension) => {
-      return Array.from(new Array(dimension * dimension), (_) => {
-          return {color: '#FFFFFF'};
-      });
   }
 
   updatePixelColor = (key) => {
