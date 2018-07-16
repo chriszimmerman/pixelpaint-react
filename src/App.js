@@ -4,23 +4,44 @@ import Grid from './Grid';
 import './App.css';
 
 class App extends React.Component {
+  constructor(props){
+    super(props);
+    const dimension = 8;
 
-  state = {
-    selectedColor: '#000000'
+    this.state = {
+      selectedBrushColor: '#000000',
+      dimension: dimension,
+      pixels: this.generatePixels(dimension)
+    };
   }
 
-  updateColor = (event) => {
-    this.setState({selectedColor: event.target.value});
+  generatePixels = (dimension) => {
+      return Array.from(new Array(dimension * dimension), (_) => {
+          return {color: '#FFFFFF'};
+      });
+  }
+
+  updatePixelColor = (key) => {
+      const pixels = this.state.pixels;
+      pixels[key].color = this.state.selectedBrushColor;
+      this.setState(pixels);
+  }
+
+  updateSelectedBrushColor = (event) => {
+    this.setState({selectedBrushColor: event.target.value});
   }
 
   render() {
       return (
         <div className='app-container'>
           <ColorPicker
-            color={this.state.selectedColor}
-            onColorChanged={this.updateColor}
+            color={this.state.selectedBrushColor}
+            onColorChanged={this.updateSelectedBrushColor}
           />
-          <Grid currentColor={this.state.selectedColor}/>
+          <Grid
+            pixels={this.state.pixels}
+            updatePixelColor={this.updatePixelColor}
+           />
         </div>
       );
   }

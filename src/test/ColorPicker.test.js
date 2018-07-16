@@ -8,7 +8,7 @@ it('renders a color picker', () => {
     expect(wrapper.find('input').prop('type')).toBe('color');
 });
 
-it('default the color to black', () => {
+it('defaults the color to black', () => {
     const expectedColor = '#000000'
     const wrapper = shallow(<ColorPicker onColorChanged={() => {}}/>);
     expect(wrapper.find('input').length).toBe(1);

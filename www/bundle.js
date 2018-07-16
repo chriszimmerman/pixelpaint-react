@@ -20442,22 +20442,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
 
-  function App() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function App(props) {
     _classCallCheck(this, App);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      selectedColor: '#000000'
-    }, _this.updateColor = function (event) {
-      _this.setState({ selectedColor: event.target.value });
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    _initialiseProps.call(_this);
+
+    var dimension = 8;
+
+    _this.state = {
+      selectedBrushColor: '#000000',
+      dimension: dimension,
+      pixels: _this.generatePixels(dimension)
+    };
+    return _this;
   }
 
   _createClass(App, [{
@@ -20467,16 +20466,39 @@ var App = function (_React$Component) {
         'div',
         { className: 'app-container' },
         _react2.default.createElement(_ColorPicker2.default, {
-          color: this.state.selectedColor,
-          onColorChanged: this.updateColor
+          color: this.state.selectedBrushColor,
+          onColorChanged: this.updateSelectedBrushColor
         }),
-        _react2.default.createElement(_Grid2.default, { currentColor: this.state.selectedColor })
+        _react2.default.createElement(_Grid2.default, {
+          pixels: this.state.pixels,
+          updatePixelColor: this.updatePixelColor
+        })
       );
     }
   }]);
 
   return App;
 }(_react2.default.Component);
+
+var _initialiseProps = function _initialiseProps() {
+  var _this2 = this;
+
+  this.generatePixels = function (dimension) {
+    return Array.from(new Array(dimension * dimension), function (_) {
+      return { color: '#FFFFFF' };
+    });
+  };
+
+  this.updatePixelColor = function (key) {
+    var pixels = _this2.state.pixels;
+    pixels[key].color = _this2.state.selectedBrushColor;
+    _this2.setState(pixels);
+  };
+
+  this.updateSelectedBrushColor = function (event) {
+    _this2.setState({ selectedBrushColor: event.target.value });
+  };
+};
 
 exports.default = App;
 
@@ -21210,28 +21232,9 @@ var Grid = function (_React$Component) {
     _inherits(Grid, _React$Component);
 
     function Grid() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
         _classCallCheck(this, Grid);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Grid.__proto__ || Object.getPrototypeOf(Grid)).call.apply(_ref, [this].concat(args))), _this), _this.generatePixels = function () {
-            return Array.from(new Array(_this.props.dimension * _this.props.dimension), function (x, i) {
-                return { key: i, color: '#FFFFFF' };
-            });
-        }, _this.state = {
-            brushColor: _this.props.currentColor,
-            pixels: _this.generatePixels()
-        }, _this.updateColor = function (key) {
-            var pixels = _this.state.pixels;
-            pixels[key].color = _this.props.currentColor;
-            _this.setState(pixels);
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        return _possibleConstructorReturn(this, (Grid.__proto__ || Object.getPrototypeOf(Grid)).apply(this, arguments));
     }
 
     _createClass(Grid, [{
@@ -21252,12 +21255,12 @@ var Grid = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { style: style },
-                this.state.pixels.map(function (pixel) {
+                this.props.pixels.map(function (pixel, index) {
                     return _react2.default.createElement(_Pixel2.default, {
-                        key: pixel.key,
+                        key: index,
                         backgroundColor: pixel.color,
                         handleOnClick: function handleOnClick() {
-                            _this2.updateColor(pixel.key);
+                            _this2.props.updatePixelColor(index);
                         }
                     });
                 })
@@ -21272,8 +21275,9 @@ exports.default = Grid;
 
 
 Grid.propTypes = {
-    currentColor: _propTypes2.default.string,
-    dimension: _propTypes2.default.number
+    dimension: _propTypes2.default.number,
+    pixels: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
+    updatePixelColor: _propTypes2.default.func
 };
 
 Grid.defaultProps = {
