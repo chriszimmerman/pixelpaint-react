@@ -20445,12 +20445,6 @@ var App = function (_React$Component) {
   function App(props) {
     _classCallCheck(this, App);
 
-    var generatePixels = function generatePixels(dimension) {
-      return Array.from(new Array(dimension * dimension), function (_) {
-        return { color: '#FFFFFF' };
-      });
-    };
-
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.updatePixelColor = function (key) {
@@ -20464,11 +20458,16 @@ var App = function (_React$Component) {
     };
 
     var dimension = 8;
+    var generatePixels = function generatePixels() {
+      return Array.from(new Array(dimension * dimension), function (_) {
+        return { color: '#FFFFFF' };
+      });
+    };
 
     _this.state = {
       selectedBrushColor: '#000000',
       dimension: dimension,
-      pixels: generatePixels(dimension)
+      pixels: generatePixels()
     };
     return _this;
   }
