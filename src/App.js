@@ -2,6 +2,8 @@ import React from 'react';
 import ColorPicker from './ColorPicker';
 import Grid from './Grid';
 import './App.css';
+import RgbToByteConverter from './RgbToByteConverter';
+import { encode } from 'bmp-js';
 
 class App extends React.Component {
   constructor(props){
@@ -31,6 +33,28 @@ class App extends React.Component {
     this.setState({selectedBrushColor: event.target.value});
   }
 
+  saveImage = () => {
+    const imageBytes = new RgbToByteConverter().convert(this.state.pixels);
+    const imageData = {
+      data: imageBytes,
+      height: this.state.dimension,
+      width: this.state.dimension
+    };
+
+    fetch('/save', {
+      method: 'POST',
+      body: JSON.stringify(imageData),
+      headers: { "Content-Type": "application/json; charset=utf-8" }
+    }).then((response) => {
+      const anchorTag = document.createElement('a');
+      anchorTag.href = '/image.bmp';
+      anchorTag.download = 'image.bmp';
+      document.body.appendChild(anchorTag);
+      anchorTag.click();
+      document.body.removeChild(anchorTag);
+    });
+  }
+
   render() {
       return (
         <div className='app-container'>
@@ -38,6 +62,7 @@ class App extends React.Component {
             color={this.state.selectedBrushColor}
             onColorChanged={this.updateSelectedBrushColor}
           />
+          <button onClick={this.saveImage}>Export Image</button>
           <Grid
             pixels={this.state.pixels}
             updatePixelColor={this.updatePixelColor}
