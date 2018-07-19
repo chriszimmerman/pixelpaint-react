@@ -3,7 +3,6 @@ import ColorPicker from './ColorPicker';
 import Grid from './Grid';
 import './App.css';
 import RgbToByteConverter from './RgbToByteConverter';
-import { encode } from 'bmp-js';
 
 class App extends React.Component {
   constructor(props){
@@ -41,18 +40,22 @@ class App extends React.Component {
       width: this.state.dimension
     };
 
-    fetch('/save', {
-      method: 'POST',
-      body: JSON.stringify(imageData),
-      headers: { "Content-Type": "application/json; charset=utf-8" }
-    }).then((response) => {
+    const promptDownload = (_) => {
       const anchorTag = document.createElement('a');
       anchorTag.href = '/image.bmp';
       anchorTag.download = 'image.bmp';
       document.body.appendChild(anchorTag);
       anchorTag.click();
       document.body.removeChild(anchorTag);
-    });
+    };
+
+    const postRequest = {
+      method: 'POST',
+      body: JSON.stringify(imageData),
+      headers: { "Content-Type": "application/json; charset=utf-8" }
+    };
+
+    fetch('/save', postRequest).then(promptDownload);
   }
 
   render() {
