@@ -2,8 +2,8 @@ import RgbToByteConverter from '../RgbToByteConverter';
 
 it('converts an array of RGB representation strings to an array of bytes', () => {
     const rgbStrings = [
-        "#FF00BB",
-        "#CC3355"
+       {color: "#FF00BB"},
+       {color: "#CC3355"}
     ];
 
     const bytes = [

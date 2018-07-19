@@ -1,8 +1,9 @@
 class RgbToByteConverter {
-    convert = (rgbStrings) => {
+    convert = (pixels) => {
         const bytes = [];
 
-        rgbStrings.forEach((rgbString) => {
+        pixels.forEach((pixel) => {
+            const rgbString = pixel.color;
             const alpha = 0x00;
             const blue = parseInt(`0x${rgbString[5]}${rgbString[6]}`);
             const green = parseInt(`0x${rgbString[3]}${rgbString[4]}`);
