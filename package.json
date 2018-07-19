@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "npm": "~6.1.0"
+  },
   "scripts": {
     "start": "npm-run-all --parallel start-server webpack-watch test-watch",
     "start-server": "node server.js",
