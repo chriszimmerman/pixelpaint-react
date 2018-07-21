@@ -20431,9 +20431,9 @@ var _Grid2 = _interopRequireDefault(_Grid);
 
 __webpack_require__(33);
 
-var _RgbToByteConverter = __webpack_require__(38);
+var _ImageExportButton = __webpack_require__(39);
 
-var _RgbToByteConverter2 = _interopRequireDefault(_RgbToByteConverter);
+var _ImageExportButton2 = _interopRequireDefault(_ImageExportButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20461,32 +20461,6 @@ var App = function (_React$Component) {
       _this.setState({ selectedBrushColor: event.target.value });
     };
 
-    _this.saveImage = function () {
-      var imageBytes = new _RgbToByteConverter2.default().convert(_this.state.pixels);
-      var imageData = {
-        data: imageBytes,
-        height: _this.state.dimension,
-        width: _this.state.dimension
-      };
-
-      var promptDownload = function promptDownload(_) {
-        var anchorTag = document.createElement('a');
-        anchorTag.href = '/image.bmp';
-        anchorTag.download = 'image.bmp';
-        document.body.appendChild(anchorTag);
-        anchorTag.click();
-        document.body.removeChild(anchorTag);
-      };
-
-      var postRequest = {
-        method: 'POST',
-        body: JSON.stringify(imageData),
-        headers: { "Content-Type": "application/json; charset=utf-8" }
-      };
-
-      fetch('/save', postRequest).then(promptDownload);
-    };
-
     var dimension = 8;
     var generatePixels = function generatePixels() {
       return Array.from(new Array(dimension * dimension), function (_) {
@@ -20512,11 +20486,10 @@ var App = function (_React$Component) {
           color: this.state.selectedBrushColor,
           onColorChanged: this.updateSelectedBrushColor
         }),
-        _react2.default.createElement(
-          'button',
-          { onClick: this.saveImage },
-          'Export Image'
-        ),
+        _react2.default.createElement(_ImageExportButton2.default, {
+          dimension: this.state.dimension,
+          pixels: this.state.pixels
+        }),
         _react2.default.createElement(_Grid2.default, {
           pixels: this.state.pixels,
           updatePixelColor: this.updatePixelColor,
@@ -22043,6 +22016,102 @@ var RgbToByteConverter = function RgbToByteConverter() {
 };
 
 exports.default = RgbToByteConverter;
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(8);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _RgbToByteConverter = __webpack_require__(38);
+
+var _RgbToByteConverter2 = _interopRequireDefault(_RgbToByteConverter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ImageExportButton = function (_React$Component) {
+    _inherits(ImageExportButton, _React$Component);
+
+    function ImageExportButton() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, ImageExportButton);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ImageExportButton.__proto__ || Object.getPrototypeOf(ImageExportButton)).call.apply(_ref, [this].concat(args))), _this), _this.exportImage = function () {
+            var imageBytes = new _RgbToByteConverter2.default().convert(_this.props.pixels);
+            var imageData = {
+                data: imageBytes,
+                height: _this.props.dimension,
+                width: _this.props.dimension
+            };
+
+            var promptDownload = function promptDownload(_) {
+                var anchorTag = document.createElement('a');
+                anchorTag.href = '/image.bmp';
+                anchorTag.download = 'image.bmp';
+                document.body.appendChild(anchorTag);
+                anchorTag.click();
+                document.body.removeChild(anchorTag);
+            };
+
+            var postRequest = {
+                method: 'POST',
+                body: JSON.stringify(imageData),
+                headers: { "Content-Type": "application/json; charset=utf-8" }
+            };
+
+            fetch('/save', postRequest).then(promptDownload);
+        }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(ImageExportButton, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'button',
+                { onClick: this.exportImage },
+                'Export Image'
+            );
+        }
+    }]);
+
+    return ImageExportButton;
+}(_react2.default.Component);
+
+exports.default = ImageExportButton;
+
+
+ImageExportButton.propTypes = {
+    pixels: _propTypes2.default.arrayOf(_propTypes2.default.shape({ color: _propTypes2.default.string })).isRequired,
+    dimension: _propTypes2.default.number.isRequired
+};
 
 /***/ })
 /******/ ]);
