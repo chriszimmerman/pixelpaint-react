@@ -35,5 +35,9 @@ export default Grid;
 Grid.propTypes = {
     dimension: PropTypes.number,
     pixels: PropTypes.arrayOf(PropTypes.object).isRequired,
-    updatePixelColor: PropTypes.func
+    updatePixelColor: PropTypes.func.isRequired
+};
+
+Grid.defaultProps = {
+    dimension: 8
 };

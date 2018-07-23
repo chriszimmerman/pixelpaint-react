@@ -6,16 +6,16 @@ import ColorPicker from '../ColorPicker';
 import ImageExportButton from '../ImageExportButton';
 
 it('renders a ColorPicker component', () => {
-    const wrapper = shallow(<App />);
+    const wrapper = shallow(<App/>);
     expect(wrapper.find(ColorPicker).length).toBe(1);
 });
 
 it('renders a Grid component', () => {
-    const wrapper = shallow(<App />);
+    const wrapper = shallow(<App/>);
     expect(wrapper.find(Grid).length).toBe(1);
 });
 
 it('renders an ImageExportButton', () => {
-    const wrapper = shallow(<App />);
+    const wrapper = shallow(<App/>);
     expect(wrapper.find(ImageExportButton).length).toBe(1);
 });

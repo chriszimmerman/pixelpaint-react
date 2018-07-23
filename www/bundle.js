@@ -495,6 +495,41 @@ module.exports = emptyObject;
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(29)(isValidElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = __webpack_require__(30)();
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -508,7 +543,7 @@ module.exports = emptyObject;
 var printWarning = function() {};
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactPropTypesSecret = __webpack_require__(7);
+  var ReactPropTypesSecret = __webpack_require__(8);
   var loggedTypeFailures = {};
 
   printWarning = function(text) {
@@ -591,7 +626,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -608,41 +643,6 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (process.env.NODE_ENV !== 'production') {
-  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
-    Symbol.for &&
-    Symbol.for('react.element')) ||
-    0xeac7;
-
-  var isValidElement = function(object) {
-    return typeof object === 'object' &&
-      object !== null &&
-      object.$$typeof === REACT_ELEMENT_TYPE;
-  };
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(29)(isValidElement, throwOnDirectAccess);
-} else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(30)();
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 9 */
@@ -994,7 +994,7 @@ var invariant = __webpack_require__(4);
 var emptyObject = __webpack_require__(5);
 var warning = __webpack_require__(9);
 var emptyFunction = __webpack_require__(3);
-var checkPropTypes = __webpack_require__(6);
+var checkPropTypes = __webpack_require__(7);
 
 // TODO: this is special because it gets imported during build.
 
@@ -2838,7 +2838,7 @@ var warning = __webpack_require__(9);
 var ExecutionEnvironment = __webpack_require__(10);
 var _assign = __webpack_require__(2);
 var emptyFunction = __webpack_require__(3);
-var checkPropTypes = __webpack_require__(6);
+var checkPropTypes = __webpack_require__(7);
 var getActiveElement = __webpack_require__(11);
 var shallowEqual = __webpack_require__(12);
 var containsNode = __webpack_require__(13);
@@ -20431,7 +20431,7 @@ var _Grid2 = _interopRequireDefault(_Grid);
 
 __webpack_require__(33);
 
-var _ImageExportButton = __webpack_require__(39);
+var _ImageExportButton = __webpack_require__(38);
 
 var _ImageExportButton2 = _interopRequireDefault(_ImageExportButton);
 
@@ -20521,7 +20521,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(8);
+var _propTypes = __webpack_require__(6);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -20584,8 +20584,8 @@ ColorPicker.defaultProps = {
 
 var assign = __webpack_require__(2);
 
-var ReactPropTypesSecret = __webpack_require__(7);
-var checkPropTypes = __webpack_require__(6);
+var ReactPropTypesSecret = __webpack_require__(8);
+var checkPropTypes = __webpack_require__(7);
 
 var printWarning = function() {};
 
@@ -21145,7 +21145,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 
-var ReactPropTypesSecret = __webpack_require__(7);
+var ReactPropTypesSecret = __webpack_require__(8);
 
 function emptyFunction() {}
 
@@ -21214,7 +21214,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(8);
+var _propTypes = __webpack_require__(6);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -21279,7 +21279,11 @@ exports.default = Grid;
 Grid.propTypes = {
     dimension: _propTypes2.default.number,
     pixels: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
-    updatePixelColor: _propTypes2.default.func
+    updatePixelColor: _propTypes2.default.func.isRequired
+};
+
+Grid.defaultProps = {
+    dimension: 8
 };
 
 /***/ }),
@@ -21299,7 +21303,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(8);
+var _propTypes = __webpack_require__(6);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -21345,7 +21349,7 @@ exports.default = Pixel;
 
 Pixel.propTypes = {
     backgroundColor: _propTypes2.default.string,
-    handleOnClick: _propTypes2.default.func
+    handleOnClick: _propTypes2.default.func.isRequired
 };
 
 Pixel.defaultProps = {
@@ -21990,55 +21994,17 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var RgbToByteConverter = function RgbToByteConverter() {
-    _classCallCheck(this, RgbToByteConverter);
-
-    this.convert = function (pixels) {
-        var bytes = [];
-
-        pixels.forEach(function (pixel) {
-            var rgbString = pixel.color;
-            var alpha = 0x00;
-            var blue = parseInt("0x" + rgbString[5] + rgbString[6]);
-            var green = parseInt("0x" + rgbString[3] + rgbString[4]);
-            var red = parseInt("0x" + rgbString[1] + rgbString[2]);
-
-            bytes.push(alpha);
-            bytes.push(blue);
-            bytes.push(green);
-            bytes.push(red);
-        });
-
-        return bytes;
-    };
-};
-
-exports.default = RgbToByteConverter;
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(8);
+var _propTypes = __webpack_require__(6);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _RgbToByteConverter = __webpack_require__(38);
+var _RgbToByteConverter = __webpack_require__(39);
 
 var _RgbToByteConverter2 = _interopRequireDefault(_RgbToByteConverter);
 
@@ -22112,6 +22078,44 @@ ImageExportButton.propTypes = {
     pixels: _propTypes2.default.arrayOf(_propTypes2.default.shape({ color: _propTypes2.default.string })).isRequired,
     dimension: _propTypes2.default.number.isRequired
 };
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var RgbToByteConverter = function RgbToByteConverter() {
+    _classCallCheck(this, RgbToByteConverter);
+
+    this.convert = function (pixels) {
+        var bytes = [];
+
+        pixels.forEach(function (pixel) {
+            var rgbString = pixel.color;
+            var alpha = 0x00;
+            var blue = parseInt("0x" + rgbString[5] + rgbString[6]);
+            var green = parseInt("0x" + rgbString[3] + rgbString[4]);
+            var red = parseInt("0x" + rgbString[1] + rgbString[2]);
+
+            bytes.push(alpha);
+            bytes.push(blue);
+            bytes.push(green);
+            bytes.push(red);
+        });
+
+        return bytes;
+    };
+};
+
+exports.default = RgbToByteConverter;
 
 /***/ })
 /******/ ]);

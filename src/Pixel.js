@@ -23,7 +23,7 @@ export default Pixel;
 
 Pixel.propTypes = {
     backgroundColor: PropTypes.string,
-    handleOnClick: PropTypes.func
+    handleOnClick: PropTypes.func.isRequired
 };
 
 Pixel.defaultProps = {
