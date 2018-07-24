@@ -20435,6 +20435,10 @@ var _ImageExportButton = __webpack_require__(38);
 
 var _ImageExportButton2 = _interopRequireDefault(_ImageExportButton);
 
+var _GridToggle = __webpack_require__(40);
+
+var _GridToggle2 = _interopRequireDefault(_GridToggle);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20461,6 +20465,10 @@ var App = function (_React$Component) {
       _this.setState({ selectedBrushColor: event.target.value });
     };
 
+    _this.toggleGridLines = function (event) {
+      _this.setState({ showGridLines: event.target.checked });
+    };
+
     var dimension = 8;
     var generatePixels = function generatePixels() {
       return Array.from(new Array(dimension * dimension), function (_) {
@@ -20470,6 +20478,7 @@ var App = function (_React$Component) {
 
     _this.state = {
       selectedBrushColor: '#000000',
+      showGridLines: true,
       dimension: dimension,
       pixels: generatePixels()
     };
@@ -20490,10 +20499,15 @@ var App = function (_React$Component) {
           dimension: this.state.dimension,
           pixels: this.state.pixels
         }),
+        _react2.default.createElement(_GridToggle2.default, {
+          checked: this.state.showGridLines,
+          handleToggle: this.toggleGridLines
+        }),
         _react2.default.createElement(_Grid2.default, {
           pixels: this.state.pixels,
           updatePixelColor: this.updatePixelColor,
-          dimension: this.state.dimension
+          dimension: this.state.dimension,
+          showGridLines: this.state.showGridLines
         })
       );
     }
@@ -21234,9 +21248,36 @@ var Grid = function (_React$Component) {
     _inherits(Grid, _React$Component);
 
     function Grid() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, Grid);
 
-        return _possibleConstructorReturn(this, (Grid.__proto__ || Object.getPrototypeOf(Grid)).apply(this, arguments));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Grid.__proto__ || Object.getPrototypeOf(Grid)).call.apply(_ref, [this].concat(args))), _this), _this.getGridStyle = function () {
+            if (_this.props.showGridLines) {
+                return {
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(' + _this.props.dimension + ', 1fr)',
+                    border: '1px solid black',
+                    width: 20 * _this.props.dimension + _this.props.dimension + 1,
+                    gridColumnGap: '1px',
+                    gridRowGap: '1px',
+                    backgroundColor: 'black'
+                };
+            }
+
+            return {
+                display: 'grid',
+                gridTemplateColumns: 'repeat(' + _this.props.dimension + ', 0fr)',
+                border: '1px solid black',
+                width: 20 * _this.props.dimension + 2
+            };
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Grid, [{
@@ -21244,19 +21285,11 @@ var Grid = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var style = {
-                display: 'grid',
-                gridTemplateColumns: 'repeat(' + this.props.dimension + ', 1fr)',
-                gridColumnGap: '1px',
-                gridRowGap: '1px',
-                backgroundColor: 'black',
-                border: '1px solid black',
-                width: 20 * this.props.dimension + this.props.dimension + 1
-            };
+            var gridStyle = this.getGridStyle();
 
             return _react2.default.createElement(
                 'div',
-                { style: style },
+                { style: gridStyle },
                 this.props.pixels.map(function (pixel, index) {
                     return _react2.default.createElement(_Pixel2.default, {
                         key: index,
@@ -21279,11 +21312,13 @@ exports.default = Grid;
 Grid.propTypes = {
     dimension: _propTypes2.default.number,
     pixels: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
-    updatePixelColor: _propTypes2.default.func.isRequired
+    updatePixelColor: _propTypes2.default.func.isRequired,
+    showGridLines: _propTypes2.default.bool
 };
 
 Grid.defaultProps = {
-    dimension: 8
+    dimension: 8,
+    showGridLines: true
 };
 
 /***/ }),
@@ -22116,6 +22151,75 @@ var RgbToByteConverter = function RgbToByteConverter() {
 };
 
 exports.default = RgbToByteConverter;
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(6);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GridToggle = function (_React$Component) {
+    _inherits(GridToggle, _React$Component);
+
+    function GridToggle() {
+        _classCallCheck(this, GridToggle);
+
+        return _possibleConstructorReturn(this, (GridToggle.__proto__ || Object.getPrototypeOf(GridToggle)).apply(this, arguments));
+    }
+
+    _createClass(GridToggle, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'label',
+                    null,
+                    'Show grid'
+                ),
+                _react2.default.createElement('input', { type: 'checkbox', checked: this.props.checked, onChange: this.props.handleToggle })
+            );
+        }
+    }]);
+
+    return GridToggle;
+}(_react2.default.Component);
+
+exports.default = GridToggle;
+
+
+GridToggle.propTypes = {
+    checked: _propTypes2.default.bool,
+    handleToggle: _propTypes2.default.func.isRequired
+};
+
+GridToggle.defaultProps = {
+    checked: true
+};
 
 /***/ })
 /******/ ]);

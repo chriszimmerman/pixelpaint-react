@@ -3,19 +3,32 @@ import PropTypes from 'prop-types';
 import Pixel from './Pixel';
 
 class Grid extends React.Component {
-    render() {
-        const style = {
-            display: 'grid',
-            gridTemplateColumns: `repeat(${this.props.dimension}, 1fr)`,
-            gridColumnGap: '1px',
-            gridRowGap: '1px',
-            backgroundColor: 'black',
-            border: '1px solid black',
-            width: 20 * this.props.dimension + this.props.dimension + 1
+    getGridStyle = () => {
+        if(this.props.showGridLines) {
+            return {
+                display: 'grid',
+                gridTemplateColumns: `repeat(${this.props.dimension}, 1fr)`,
+                border: '1px solid black',
+                width: 20 * this.props.dimension + this.props.dimension + 1,
+                gridColumnGap: '1px',
+                gridRowGap: '1px',
+                backgroundColor: 'black'
+            }
         }
 
+        return {
+            display: 'grid',
+            gridTemplateColumns: `repeat(${this.props.dimension}, 0fr)`,
+            border: '1px solid black',
+            width: 20 * this.props.dimension + 2
+        };
+    };
+
+    render() {
+        const gridStyle = this.getGridStyle();
+
         return (
-            <div style={style}>
+            <div style={gridStyle}>
                 {
                     this.props.pixels.map((pixel, index) =>
                         <Pixel
@@ -35,9 +48,11 @@ export default Grid;
 Grid.propTypes = {
     dimension: PropTypes.number,
     pixels: PropTypes.arrayOf(PropTypes.object).isRequired,
-    updatePixelColor: PropTypes.func.isRequired
+    updatePixelColor: PropTypes.func.isRequired,
+    showGridLines: PropTypes.bool
 };
 
 Grid.defaultProps = {
-    dimension: 8
+    dimension: 8,
+    showGridLines: true
 };

@@ -3,6 +3,7 @@ import ColorPicker from './ColorPicker';
 import Grid from './Grid';
 import './App.css';
 import ImageExportButton from './ImageExportButton';
+import GridToggle from './GridToggle';
 
 class App extends React.Component {
   constructor(props){
@@ -17,6 +18,7 @@ class App extends React.Component {
 
     this.state = {
       selectedBrushColor: '#000000',
+      showGridLines: true,
       dimension: dimension,
       pixels: generatePixels()
     };
@@ -32,6 +34,10 @@ class App extends React.Component {
     this.setState({selectedBrushColor: event.target.value});
   }
 
+  toggleGridLines = (event) => {
+    this.setState({showGridLines: event.target.checked});
+  }
+
   render() {
       return (
         <div className='app-container'>
@@ -43,10 +49,15 @@ class App extends React.Component {
             dimension={this.state.dimension}
             pixels={this.state.pixels}
           />
+          <GridToggle
+            checked={this.state.showGridLines}
+            handleToggle={this.toggleGridLines}
+          />
           <Grid
             pixels={this.state.pixels}
             updatePixelColor={this.updatePixelColor}
             dimension={this.state.dimension}
+            showGridLines={this.state.showGridLines}
            />
         </div>
       );
