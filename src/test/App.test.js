@@ -5,6 +5,7 @@ import Grid from '../Grid';
 import ColorPicker from '../ColorPicker';
 import GridToggle from '../GridToggle';
 import ImageExportButton from '../ImageExportButton';
+import DimensionDropdown from '../DimensionDropdown';
 
 it('renders a ColorPicker component', () => {
     const wrapper = shallow(<App/>);
@@ -24,4 +25,9 @@ it('renders a GridToggle component', () => {
 it('renders an ImageExportButton', () => {
     const wrapper = shallow(<App/>);
     expect(wrapper.find(ImageExportButton).length).toBe(1);
+});
+
+it('renders a DimensionDropdown component', () => {
+    const wrapper = shallow(<App/>);
+    expect(wrapper.find(DimensionDropdown).length).toBe(1);
 });

@@ -20412,7 +20412,7 @@ module.exports = camelize;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -20439,6 +20439,10 @@ var _GridToggle = __webpack_require__(40);
 
 var _GridToggle2 = _interopRequireDefault(_GridToggle);
 
+var _DimensionDropdown = __webpack_require__(41);
+
+var _DimensionDropdown2 = _interopRequireDefault(_DimensionDropdown);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20448,72 +20452,114 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+    _inherits(App, _React$Component);
 
-  function App(props) {
-    _classCallCheck(this, App);
+    function App(props) {
+        _classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this.updatePixelColor = function (key) {
-      var pixels = _this.state.pixels;
-      pixels[key].color = _this.state.selectedBrushColor;
-      _this.setState(pixels);
-    };
+        _this.generatePixels = function (dimension) {
+            return Array.from(new Array(dimension * dimension), function (_) {
+                return { color: '#FFFFFF' };
+            });
+        };
 
-    _this.updateSelectedBrushColor = function (event) {
-      _this.setState({ selectedBrushColor: event.target.value });
-    };
+        _this.updatePixelColor = function (key) {
+            var pixels = _this.state.pixels;
+            pixels[key].color = _this.state.selectedBrushColor;
+            _this.setState(pixels);
+        };
 
-    _this.toggleGridLines = function (event) {
-      _this.setState({ showGridLines: event.target.checked });
-    };
+        _this.updateSelectedBrushColor = function (event) {
+            _this.setState({ selectedBrushColor: event.target.value });
+        };
 
-    var dimension = 8;
-    var generatePixels = function generatePixels() {
-      return Array.from(new Array(dimension * dimension), function (_) {
-        return { color: '#FFFFFF' };
-      });
-    };
+        _this.toggleGridLines = function (event) {
+            _this.setState({ showGridLines: event.target.checked });
+        };
 
-    _this.state = {
-      selectedBrushColor: '#000000',
-      showGridLines: true,
-      dimension: dimension,
-      pixels: generatePixels()
-    };
-    return _this;
-  }
+        _this.handleDimensionChange = function (event) {
+            var newDimension = Number(event.target.value);
+            _this.setState({
+                dimension: newDimension,
+                pixels: _this.generatePixels(newDimension)
+            });
+        };
 
-  _createClass(App, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'app-container' },
-        _react2.default.createElement(_ColorPicker2.default, {
-          color: this.state.selectedBrushColor,
-          onColorChanged: this.updateSelectedBrushColor
-        }),
-        _react2.default.createElement(_ImageExportButton2.default, {
-          dimension: this.state.dimension,
-          pixels: this.state.pixels
-        }),
-        _react2.default.createElement(_GridToggle2.default, {
-          checked: this.state.showGridLines,
-          handleToggle: this.toggleGridLines
-        }),
-        _react2.default.createElement(_Grid2.default, {
-          pixels: this.state.pixels,
-          updatePixelColor: this.updatePixelColor,
-          dimension: this.state.dimension,
-          showGridLines: this.state.showGridLines
-        })
-      );
+        var defaultDimension = 8;
+
+        _this.state = {
+            selectedBrushColor: '#000000',
+            showGridLines: true,
+            dimension: defaultDimension,
+            pixels: _this.generatePixels(defaultDimension)
+        };
+        return _this;
     }
-  }]);
 
-  return App;
+    _createClass(App, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'app-container' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'color-picker' },
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'Color:'
+                    ),
+                    _react2.default.createElement(_ColorPicker2.default, {
+                        color: this.state.selectedBrushColor,
+                        onColorChanged: this.updateSelectedBrushColor
+                    })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(_GridToggle2.default, {
+                        checked: this.state.showGridLines,
+                        handleToggle: this.toggleGridLines
+                    })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'Size:'
+                    ),
+                    _react2.default.createElement(_DimensionDropdown2.default, {
+                        handleChange: this.handleDimensionChange
+                    })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(_ImageExportButton2.default, {
+                        dimension: this.state.dimension,
+                        pixels: this.state.pixels
+                    })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(_Grid2.default, {
+                        pixels: this.state.pixels,
+                        updatePixelColor: this.updatePixelColor,
+                        dimension: this.state.dimension,
+                        showGridLines: this.state.showGridLines
+                    })
+                )
+            );
+        }
+    }]);
+
+    return App;
 }(_react2.default.Component);
 
 exports.default = App;
@@ -22220,6 +22266,78 @@ GridToggle.propTypes = {
 GridToggle.defaultProps = {
     checked: true
 };
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(4);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DimensionDropdown = function (_Component) {
+    _inherits(DimensionDropdown, _Component);
+
+    function DimensionDropdown() {
+        _classCallCheck(this, DimensionDropdown);
+
+        return _possibleConstructorReturn(this, (DimensionDropdown.__proto__ || Object.getPrototypeOf(DimensionDropdown)).apply(this, arguments));
+    }
+
+    _createClass(DimensionDropdown, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'select',
+                { onChange: this.props.handleChange },
+                _react2.default.createElement(
+                    'option',
+                    { value: '8' },
+                    '8x8'
+                ),
+                _react2.default.createElement(
+                    'option',
+                    { value: '16' },
+                    '16x16'
+                ),
+                _react2.default.createElement(
+                    'option',
+                    { value: '32' },
+                    '32x32'
+                )
+            );
+        }
+    }]);
+
+    return DimensionDropdown;
+}(_react.Component);
+
+DimensionDropdown.propTypes = {
+    handleChange: _propTypes2.default.func.isRequired
+};
+
+exports.default = DimensionDropdown;
 
 /***/ })
 /******/ ]);
