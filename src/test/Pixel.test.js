@@ -24,6 +24,20 @@ it('takes an onClick handler as a prop and sets it on the onClick event', () => 
     expect(wrapper.find('div').prop('onClick')).toBe(expectedOnClick);
 });
 
+it('triggers the onClick event to happen if the left mouse button is down on mouseenter', () => {
+    const expectedOnClick = td.func(); 
+    const wrapper = shallow(<Pixel handleOnClick={expectedOnClick}/>);
+    wrapper.simulate("mouseenter", {buttons: "hi"});
+    td.verify(expectedOnClick());
+});
+
+it('does not trigger the onClick event to happen if the left mouse button is not down on mouseenter', () => {
+    const expectedOnClick = td.func(); 
+    const wrapper = shallow(<Pixel handleOnClick={expectedOnClick}/>);
+    wrapper.simulate("mouseenter", {});
+    td.verify(expectedOnClick(), {times: 0});
+});
+
 it('is 20 by 20 pixels', () => {
     const wrapper = shallow(<Pixel handleOnClick={td.func()}/>);
     expect(wrapper.find('div').length).toBe(1);

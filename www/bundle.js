@@ -21408,6 +21408,8 @@ var Pixel = function (_React$Component) {
     _createClass(Pixel, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var style = {
                 backgroundColor: this.props.backgroundColor,
                 height: '20px',
@@ -21417,7 +21419,12 @@ var Pixel = function (_React$Component) {
 
             return _react2.default.createElement('div', {
                 style: style,
-                onClick: this.props.handleOnClick
+                onClick: this.props.handleOnClick,
+                onMouseEnter: function onMouseEnter(event) {
+                    if (event.buttons) {
+                        _this2.props.handleOnClick();
+                    }
+                }
             });
         }
     }]);
