@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './App.css';
 
 class GridToggle extends React.Component {
     render() {
         return (
             <div>
-                <label>Show grid</label>
+                <label className='toolbar-label'>Show grid:</label>
                 <input type="checkbox" checked={this.props.checked} onChange={this.props.handleToggle}/>
             </div>
         );

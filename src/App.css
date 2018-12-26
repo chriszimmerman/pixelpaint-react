@@ -2,3 +2,12 @@
     margin: auto;
     width: 50%;
 }
+
+.toolbar-item {
+    float: left;
+    margin-right: 20px;
+}
+
+.toolbar-label {
+    margin-right: 5px;
+}

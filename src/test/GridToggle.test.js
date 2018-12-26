@@ -19,7 +19,7 @@ it('calls the onToggle function prop when clicked', () => {
 
 it('renders a label indicating whether to show the grid lines or not', () => {
     const wrapper = shallow(<GridToggle handleToggle={td.func()}/>);
-    const expectedLabelText = "Show grid";
+    const expectedLabelText = "Show grid:";
     expect(wrapper.find('label').length).toBe(1);
     expect(wrapper.find('label').text()).toBe(expectedLabelText);
 });

@@ -53,30 +53,35 @@ class App extends React.Component {
     render() {
         return (
             <div className='app-container'>
-                <div className='color-picker'>
-                    <label>Color:</label>
-                    <ColorPicker
-                        color={this.state.selectedBrushColor}
-                        onColorChanged={this.updateSelectedBrushColor}
-                    />
-                </div>
-                <div>
-                    <GridToggle
-                        checked={this.state.showGridLines}
-                        handleToggle={this.toggleGridLines}
-                    />
-                </div>
-                <div>
-                    <label>Size:</label>
-                    <DimensionDropdown
-                        handleChange={this.handleDimensionChange}
-                    />
-                </div>
-                <div>
-                    <ImageExportButton
-                        dimension={this.state.dimension}
-                        pixels={this.state.pixels}
-                    />
+                <div style={{textAlign: 'center'}}>
+                    <h1>Pixelpaint</h1>
+                    <div style={{display: 'inline-block'}}>
+                        <div className='toolbar-item'>
+                            <label className='toolbar-label'>Color:</label>
+                            <ColorPicker
+                                color={this.state.selectedBrushColor}
+                                onColorChanged={this.updateSelectedBrushColor}
+                            />
+                        </div>
+                        <div className='toolbar-item'>
+                            <GridToggle
+                                checked={this.state.showGridLines}
+                                handleToggle={this.toggleGridLines}
+                            />
+                        </div>
+                        <div className='toolbar-item'>
+                            <label className='toolbar-label'>Size:</label>
+                            <DimensionDropdown
+                                handleChange={this.handleDimensionChange}
+                            />
+                        </div>
+                        <div className='toolbar-item'>
+                            <ImageExportButton
+                                dimension={this.state.dimension}
+                                pixels={this.state.pixels}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <Grid

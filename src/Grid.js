@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Pixel from './Pixel';
+import './Grid.css';
 
 class Grid extends React.Component {
     getGridStyle = () => {
@@ -28,16 +29,18 @@ class Grid extends React.Component {
         const gridStyle = this.getGridStyle();
 
         return (
-            <div style={gridStyle}>
-                {
-                    this.props.pixels.map((pixel, index) =>
-                        <Pixel
-                            key={index}
-                            backgroundColor={pixel.color}
-                            handleOnClick={() => {this.props.updatePixelColor(index)}}
-                        />
-                    )
-                }
+            <div className='grid-wrapper'>
+                <div className='grid' style={gridStyle}>
+                    {
+                        this.props.pixels.map((pixel, index) =>
+                            <Pixel
+                                key={index}
+                                backgroundColor={pixel.color}
+                                handleOnClick={() => {this.props.updatePixelColor(index)}}
+                            />
+                        )
+                    }
+                </div>
             </div>
         );
     }

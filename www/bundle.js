@@ -20506,16 +20506,21 @@ var App = function (_React$Component) {
                 { className: 'app-container' },
                 _react2.default.createElement(
                     'div',
-                    { style: { margin: 'auto' } },
+                    { style: { textAlign: 'center' } },
+                    _react2.default.createElement(
+                        'h1',
+                        null,
+                        'Pixelpaint'
+                    ),
                     _react2.default.createElement(
                         'div',
-                        { style: { float: 'left', width: '25%' } },
+                        { style: { display: 'inline-block' } },
                         _react2.default.createElement(
                             'div',
-                            { className: 'color-picker' },
+                            { className: 'toolbar-item' },
                             _react2.default.createElement(
                                 'label',
-                                null,
+                                { className: 'toolbar-label' },
                                 'Color:'
                             ),
                             _react2.default.createElement(_ColorPicker2.default, {
@@ -20525,7 +20530,7 @@ var App = function (_React$Component) {
                         ),
                         _react2.default.createElement(
                             'div',
-                            null,
+                            { className: 'toolbar-item' },
                             _react2.default.createElement(_GridToggle2.default, {
                                 checked: this.state.showGridLines,
                                 handleToggle: this.toggleGridLines
@@ -20533,10 +20538,10 @@ var App = function (_React$Component) {
                         ),
                         _react2.default.createElement(
                             'div',
-                            null,
+                            { className: 'toolbar-item' },
                             _react2.default.createElement(
                                 'label',
-                                null,
+                                { className: 'toolbar-label' },
                                 'Size:'
                             ),
                             _react2.default.createElement(_DimensionDropdown2.default, {
@@ -20545,27 +20550,23 @@ var App = function (_React$Component) {
                         ),
                         _react2.default.createElement(
                             'div',
-                            null,
+                            { className: 'toolbar-item' },
                             _react2.default.createElement(_ImageExportButton2.default, {
                                 dimension: this.state.dimension,
                                 pixels: this.state.pixels
                             })
                         )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { style: { marginLeft: '25%' } },
-                        _react2.default.createElement(
-                            'div',
-                            null,
-                            _react2.default.createElement(_Grid2.default, {
-                                pixels: this.state.pixels,
-                                updatePixelColor: this.updatePixelColor,
-                                dimension: this.state.dimension,
-                                showGridLines: this.state.showGridLines
-                            })
-                        )
                     )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(_Grid2.default, {
+                        pixels: this.state.pixels,
+                        updatePixelColor: this.updatePixelColor,
+                        dimension: this.state.dimension,
+                        showGridLines: this.state.showGridLines
+                    })
                 )
             );
         }
@@ -21294,6 +21295,8 @@ var _Pixel = __webpack_require__(32);
 
 var _Pixel2 = _interopRequireDefault(_Pixel);
 
+__webpack_require__(42);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21347,16 +21350,20 @@ var Grid = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                { style: gridStyle },
-                this.props.pixels.map(function (pixel, index) {
-                    return _react2.default.createElement(_Pixel2.default, {
-                        key: index,
-                        backgroundColor: pixel.color,
-                        handleOnClick: function handleOnClick() {
-                            _this2.props.updatePixelColor(index);
-                        }
-                    });
-                })
+                { className: 'grid-wrapper' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'grid', style: gridStyle },
+                    this.props.pixels.map(function (pixel, index) {
+                        return _react2.default.createElement(_Pixel2.default, {
+                            key: index,
+                            backgroundColor: pixel.color,
+                            handleOnClick: function handleOnClick() {
+                                _this2.props.updatePixelColor(index);
+                            }
+                        });
+                    })
+                )
             );
         }
     }]);
@@ -21515,7 +21522,7 @@ exports = module.exports = __webpack_require__(35)(false);
 
 
 // module
-exports.push([module.i, ".app-container {\n    margin: auto;\n    width: 50%;\n    text-align: center;\n}\n", ""]);
+exports.push([module.i, ".app-container {\n    margin: auto;\n    width: 50%;\n}\n\n.toolbar-item {\n    float: left;\n    margin-right: 20px;\n}\n\n.toolbar-label {\n    margin-right: 5px;\n}\n", ""]);
 
 // exports
 
@@ -22238,6 +22245,8 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+__webpack_require__(33);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22263,8 +22272,8 @@ var GridToggle = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     'label',
-                    null,
-                    'Show grid'
+                    { className: 'toolbar-label' },
+                    'Show grid:'
                 ),
                 _react2.default.createElement('input', { type: 'checkbox', checked: this.props.checked, onChange: this.props.handleToggle })
             );
@@ -22357,6 +22366,70 @@ DimensionDropdown.propTypes = {
 };
 
 exports.default = DimensionDropdown;
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(43);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(36)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {
+	module.hot.accept("!!../node_modules/css-loader/index.js!./Grid.css", function() {
+		var newContent = require("!!../node_modules/css-loader/index.js!./Grid.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(35)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".grid-wrapper {\n    display: flex;\n    justify-content: center;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
