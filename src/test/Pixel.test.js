@@ -17,25 +17,25 @@ it('defaults the color to white', () => {
     expect(wrapper.find('div').prop('style')).toHaveProperty('backgroundColor', expectedColor);
 });
 
-it('takes an onClick handler as a prop and sets it on the onClick event', () => {
-    const expectedOnClick = td.func(); 
-    const wrapper = shallow(<Pixel handleOnClick={expectedOnClick}/>);
+it('takes an onMouseDown handler as a prop and sets it on the onMouseDown event', () => {
+    const expectedOnMouseDown = td.func(); 
+    const wrapper = shallow(<Pixel handleOnClick={expectedOnMouseDown}/>);
     expect(wrapper.find('div').length).toBe(1);
-    expect(wrapper.find('div').prop('onClick')).toBe(expectedOnClick);
+    expect(wrapper.find('div').prop('onMouseDown')).toBe(expectedOnMouseDown);
 });
 
-it('triggers the onClick event to happen if the left mouse button is down on mouseenter', () => {
-    const expectedOnClick = td.func(); 
-    const wrapper = shallow(<Pixel handleOnClick={expectedOnClick}/>);
+it('triggers the onMouseDown event to happen if the left mouse button is down on mouseenter', () => {
+    const expectedOnMouseDown = td.func(); 
+    const wrapper = shallow(<Pixel handleOnClick={expectedOnMouseDown}/>);
     wrapper.simulate("mouseenter", {buttons: "hi"});
-    td.verify(expectedOnClick());
+    td.verify(expectedOnMouseDown());
 });
 
-it('does not trigger the onClick event to happen if the left mouse button is not down on mouseenter', () => {
-    const expectedOnClick = td.func(); 
-    const wrapper = shallow(<Pixel handleOnClick={expectedOnClick}/>);
+it('does not trigger the onMouseDown event to happen if the left mouse button is not down on mouseenter', () => {
+    const expectedOnMouseDown = td.func(); 
+    const wrapper = shallow(<Pixel handleOnClick={expectedOnMouseDown}/>);
     wrapper.simulate("mouseenter", {});
-    td.verify(expectedOnClick(), {times: 0});
+    td.verify(expectedOnMouseDown(), {times: 0});
 });
 
 it('is 20 by 20 pixels', () => {

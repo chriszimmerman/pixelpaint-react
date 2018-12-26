@@ -13,7 +13,7 @@ class Pixel extends React.Component {
         return (
             <div
                 style={style}
-                onClick={this.props.handleOnClick}
+                onMouseDown={this.props.handleOnClick}
                 onMouseEnter={(event) => {if(event.buttons){this.props.handleOnClick();}}}
             ></div>
         );

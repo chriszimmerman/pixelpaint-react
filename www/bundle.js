@@ -20506,54 +20506,66 @@ var App = function (_React$Component) {
                 { className: 'app-container' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'color-picker' },
+                    { style: { margin: 'auto' } },
                     _react2.default.createElement(
-                        'label',
-                        null,
-                        'Color:'
+                        'div',
+                        { style: { float: 'left', width: '25%' } },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'color-picker' },
+                            _react2.default.createElement(
+                                'label',
+                                null,
+                                'Color:'
+                            ),
+                            _react2.default.createElement(_ColorPicker2.default, {
+                                color: this.state.selectedBrushColor,
+                                onColorChanged: this.updateSelectedBrushColor
+                            })
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(_GridToggle2.default, {
+                                checked: this.state.showGridLines,
+                                handleToggle: this.toggleGridLines
+                            })
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(
+                                'label',
+                                null,
+                                'Size:'
+                            ),
+                            _react2.default.createElement(_DimensionDropdown2.default, {
+                                handleChange: this.handleDimensionChange
+                            })
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(_ImageExportButton2.default, {
+                                dimension: this.state.dimension,
+                                pixels: this.state.pixels
+                            })
+                        )
                     ),
-                    _react2.default.createElement(_ColorPicker2.default, {
-                        color: this.state.selectedBrushColor,
-                        onColorChanged: this.updateSelectedBrushColor
-                    })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_GridToggle2.default, {
-                        checked: this.state.showGridLines,
-                        handleToggle: this.toggleGridLines
-                    })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
                     _react2.default.createElement(
-                        'label',
-                        null,
-                        'Size:'
-                    ),
-                    _react2.default.createElement(_DimensionDropdown2.default, {
-                        handleChange: this.handleDimensionChange
-                    })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_ImageExportButton2.default, {
-                        dimension: this.state.dimension,
-                        pixels: this.state.pixels
-                    })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_Grid2.default, {
-                        pixels: this.state.pixels,
-                        updatePixelColor: this.updatePixelColor,
-                        dimension: this.state.dimension,
-                        showGridLines: this.state.showGridLines
-                    })
+                        'div',
+                        { style: { marginLeft: '25%' } },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(_Grid2.default, {
+                                pixels: this.state.pixels,
+                                updatePixelColor: this.updatePixelColor,
+                                dimension: this.state.dimension,
+                                showGridLines: this.state.showGridLines
+                            })
+                        )
+                    )
                 )
             );
         }
@@ -21419,7 +21431,7 @@ var Pixel = function (_React$Component) {
 
             return _react2.default.createElement('div', {
                 style: style,
-                onClick: this.props.handleOnClick,
+                onMouseDown: this.props.handleOnClick,
                 onMouseEnter: function onMouseEnter(event) {
                     if (event.buttons) {
                         _this2.props.handleOnClick();
@@ -21503,7 +21515,7 @@ exports = module.exports = __webpack_require__(35)(false);
 
 
 // module
-exports.push([module.i, ".app-container {\n    margin: auto;\n    width: 50%;\n}", ""]);
+exports.push([module.i, ".app-container {\n    margin: auto;\n    width: 50%;\n    text-align: center;\n}\n", ""]);
 
 // exports
 
