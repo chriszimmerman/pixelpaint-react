@@ -4,4 +4,4 @@ A pixel art editor written in React.
 
 ## Using the app
 
-This app has been deployed to [Heroku](https://pixelpaint-react.herokuapp.com/). You can try it out there.
+This app has been deployed to [Render](https://pixelpaint-react.onrender.com/). You can try it out there.
